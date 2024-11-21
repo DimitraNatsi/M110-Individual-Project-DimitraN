@@ -45,7 +45,7 @@
                     "name": "InteractWithItem",
                     "type": "Button",
                     "id": "f032ac13-f1e8-4ca9-9f8a-6631d5a52098",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -55,6 +55,15 @@
                     "type": "Button",
                     "id": "78c2e883-fd0f-4216-b971-a05056f608f6",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InteractWithItemV2",
+                    "type": "Button",
+                    "id": "adaad72b-8a47-4a89-8f49-216579bd922b",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -256,6 +265,28 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "ToggleMainMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3949dfbc-1f62-4eee-80c3-a00bb23eefb6",
+                    "path": "<Keyboard>/#(E)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractWithItemV2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1295d813-b77f-49b1-a6df-ac0221e61456",
+                    "path": "<Keyboard>/#(E)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "InteractWithItemV2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
