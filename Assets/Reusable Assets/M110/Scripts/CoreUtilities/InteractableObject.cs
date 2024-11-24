@@ -13,31 +13,68 @@ public class InteractableObject : MonoBehaviour
     [SerializeField]
     UnityEvent unTargetEvent;
 
- 
+    private bool nearTable = false;
+    private Vector3 tablePosition; // Η θέση στην οποία τοποθετείται το αντικείμενο
     public void Target()
     {
-        targetEvent?.Invoke();
+        nearTable = true;
+        tablePosition = transform.position; // Αποθηκεύει τη θέση του τραπεζιού
+        targetEvent?.Invoke(); // Εκτελεί το event αν έχει οριστεί
+        Debug.Log("Near table!");
     }
 
     public void UnTarget()
     {
-        unTargetEvent?.Invoke();
+        nearTable = false;
+        unTargetEvent?.Invoke(); // Εκτελεί το event αν έχει οριστεί
+        Debug.Log("Left table!");
     }
+
+    
+  
+    private bool isHeld = false; // Ελέγχει αν ο παίκτης κρατάει το αντικείμενο
+    private Vector3 originalPosition; // Αποθήκευση αρχικής θέσης
+
+    public void GetV() => interactionEvent?.Invoke();
 
     public void Interact()
     {
-        // Simple interaction logic, e.g., pick up the item or trigger an event
-        Debug.Log("Interacted with " + gameObject.name);
+        if (!isHeld)
+        {
+            // Πιάσιμο αντικειμένου
+            originalPosition = transform.position;
+            transform.position = Camera.main.transform.position + Camera.main.transform.forward * 1.5f; // Μπροστά από τον παίκτη
+            Debug.Log("Picked up " + gameObject.name);
 
-        // Do smth here or add it to the exposed UnityEvent on Unity Editor
-        interactionEvent?.Invoke(); 
+            isHeld = true;
+        }
+        else
+        {
+            // ’φημα αντικειμένου
+            if (nearTable)
+            {
+                // Αν είναι κοντά στο τραπέζι, τοποθέτησέ το στη θέση του τραπεζιού
+                transform.position = tablePosition;
+                Debug.Log("Placed " + gameObject.name + " on the table!");
+            }
+            else
+            {
+                // Απλά άφησέ το στη θέση που είναι
+                Debug.Log("Dropped " + gameObject.name);
+            }
+
+            isHeld = false;
+        }
+
+        interactionEvent?.Invoke();
     }
 
 
-    #region examples
+
+#region examples
 
 
-    public void OnPickUp()
+public void OnPickUp()
     {
         Debug.Log(gameObject.name + " picked up!");
         // You can either disable or destroy the object
@@ -50,4 +87,5 @@ public class InteractableObject : MonoBehaviour
 
     #endregion
 }
+
 
